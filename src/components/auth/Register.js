@@ -6,6 +6,7 @@ export const Register = (props) => {
     email: "",
     fullName: "",
     isAddmin: false,
+    libraryName: "",
   });
   let navigate = useNavigate();
 
@@ -80,6 +81,17 @@ export const Register = (props) => {
             id="email"
             className="form-control"
             placeholder="Email address"
+            required
+          />
+        </fieldset>
+        <fieldset>
+          <label htmlFor="email"> Library Name </label>
+          <input
+            onChange={updateCustomer}
+            type="text"
+            id="libraryName"
+            className="form-control"
+            placeholder="Alexandria"
             required
           />
         </fieldset>
