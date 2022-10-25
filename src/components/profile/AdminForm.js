@@ -1,3 +1,3 @@
 export const AdminForm = () => {
-  return;
+  return <h1>Admin View</h1>;
 };
