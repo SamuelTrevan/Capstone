@@ -18,7 +18,10 @@ export const Login = () => {
             "bookaholic_user",
             JSON.stringify({
               id: user.id,
-              staff: user.isStaff,
+              staff: user.isAdmin,
+              fullName: user.fullName,
+              email: user.email,
+              libraryName: user.libraryName,
             })
           );
 
