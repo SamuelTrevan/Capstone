@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Book } from "./Books";
 
 export const BooksList = () => {
   const [books, setBooks] = useState([]);
@@ -17,13 +18,17 @@ export const BooksList = () => {
     <div>
       <h1>All Books</h1>
       <button onClick={() => navigate("/books/create")}>Add Book</button>
-      {books.map((book) => {
-        return (
-          <div key={book.id} className="book_image" onClick={() => {}}>
-            <img src={book.bookImage} alt={book.title} />
-          </div>
-        );
-      })}
+      {books.map((book) => (
+        <Book
+          key={`book--${book.id}`}
+          book={book}
+          // id={book.id}
+          // author={book.author}
+          // title={book.title}
+          // summary={book.bookSummary}
+          // image={book.bookImage}
+        />
+      ))}
     </div>
   );
 };
