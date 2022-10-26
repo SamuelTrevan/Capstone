@@ -75,7 +75,7 @@ export const AddBookForm = () => {
       <h2 className="ticketForm__title">New Service Ticket</h2>
       <fieldset>
         <div className="form-group">
-          <label htmlFor="title">Title:</label>
+          <label htmlFor="title">Title: </label>
           <input
             required
             autoFocus
@@ -90,7 +90,7 @@ export const AddBookForm = () => {
       </fieldset>
       <fieldset>
         <div className="form-group">
-          <label htmlFor="author">Author:</label>
+          <label htmlFor="author">Author: </label>
           <input
             required
             autoFocus
@@ -105,14 +105,13 @@ export const AddBookForm = () => {
       </fieldset>
       <fieldset>
         <div className="form-group">
-          <label htmlFor="genre">Choose a genre:</label>
+          <label htmlFor="genre">Choose a genre: </label>
           <select
             required
             autoFocus
             name="genre"
             type="text"
             className="form-control"
-            placeholder="Author of Book"
             value={userChoices.genre}
             onChange={handleInputChange}
           >
@@ -127,7 +126,7 @@ export const AddBookForm = () => {
       </fieldset>
       <fieldset>
         <div className="form-group">
-          <label htmlFor="summary">Summary:</label>
+          <label htmlFor="summary">Summary: </label>
           <input
             required
             autoFocus
@@ -142,7 +141,7 @@ export const AddBookForm = () => {
       </fieldset>
       <fieldset>
         <div className="form-group">
-          <label htmlFor="summary">Book Image URL:</label>
+          <label htmlFor="summary">Book Image URL: </label>
           <input
             required
             autoFocus
