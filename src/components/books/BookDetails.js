@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const BookDetails = () => {
   const { bookId } = useParams();
   const [book, setBooks] = useState({});
   const [genres, setGenre] = useState([]);
   const [foundGenres, setFoundGenres] = useState([]);
+
+  const navigate = useNavigate();
+  const BookaholicUser = localStorage.getItem("bookaholic_user");
+  const bookaholicUserObj = JSON.parse(BookaholicUser);
 
   useEffect(() => {
     fetch(`http://localhost:8088/books?id=${bookId}`)
@@ -34,9 +38,68 @@ export const BookDetails = () => {
     );
   }, [book, genres]);
 
+  const addBookButton = (event) => {
+    event.preventDefault();
+    const newOwnedBook = {
+      bookId: book.id,
+      userId: bookaholicUserObj.id,
+      haveRead: false,
+    };
+
+    return fetch(`http://localhost:8088/ownedBooks`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newOwnedBook), //need to add the book
+    })
+      .then((response) => response.json())
+      .then(() => {
+        alert("Book Added to Owned Books");
+        navigate("/");
+      });
+  };
+
+  const removeBookButton = (event) => {
+    event.preventDefault();
+
+    fetch(`http://localhost:8088/ownedBooks`)
+      .then((response) => response.json())
+      .then((data) => {
+        const foundOwnedBook = data.find(
+          (item) =>
+            item.userId === bookaholicUserObj.id &&
+            item.bookId === parseInt(bookId)
+        );
+
+        return fetch(`http://localhost:8088/ownedBooks/${foundOwnedBook.id}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(foundOwnedBook), //need to add the book
+        })
+          .then((response) => response.json())
+          .then(() => {
+            alert("Book Removed from Owned Books");
+            navigate("/");
+          });
+      });
+  };
+
+  const markBookRead = () => {};
+
   return (
     <div className="book">
-      <button>Add to Owned Books</button>
+      <button onClick={(clickEvent) => addBookButton(clickEvent)}>
+        Add to Owned Books
+      </button>
+      <button onClick={(clickEvent) => removeBookButton(clickEvent)}>
+        Remove From Owned Books
+      </button>
+      <button onClick={(clickEvent) => markBookRead(clickEvent)}>
+        Read Book
+      </button>
       <header className="book-header">{book.title}</header>
       <div>Author: {book.author}</div>
       <div>Summary: {book.bookSummary}</div>
