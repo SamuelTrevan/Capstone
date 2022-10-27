@@ -3,6 +3,7 @@ import { AddBookForm } from "../books/AddBook";
 import { BookDetails } from "../books/BookDetails";
 import { BooksList } from "../books/BooksList";
 import { OwnedBooks } from "../books/ownedBooks";
+// import { Library } from "../Library/Library";
 import { ReadBooks } from "../books/ReadBooks";
 import { Profile } from "../profile/Profile";
 export const UserViews = () => {
@@ -14,6 +15,7 @@ export const UserViews = () => {
           <>
             <h1>Bookaholic</h1>
             <div>Your All In One Book Tracking Application</div>
+            {/* <Library /> */}
             <OwnedBooks />
 
             <Outlet />
