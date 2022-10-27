@@ -16,18 +16,12 @@ export const BooksList = () => {
 
   return (
     <div>
-      <h1>All Books</h1>
-      <button onClick={() => navigate("/books/create")}>Add Book</button>
+      <h1>Master Library</h1>
+      <button onClick={() => navigate("/books/create")}>
+        Add Book to Master Library
+      </button>
       {books.map((book) => (
-        <Book
-          key={`book--${book.id}`}
-          book={book}
-          // id={book.id}
-          // author={book.author}
-          // title={book.title}
-          // summary={book.bookSummary}
-          // image={book.bookImage}
-        />
+        <Book key={`book--${book.id}`} book={book} />
       ))}
     </div>
   );
