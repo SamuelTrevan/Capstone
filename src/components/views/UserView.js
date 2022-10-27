@@ -2,6 +2,7 @@ import { Outlet, Route, Routes } from "react-router-dom";
 import { AddBookForm } from "../books/AddBook";
 import { BookDetails } from "../books/BookDetails";
 import { BooksList } from "../books/BooksList";
+import { OwnedBooks } from "../books/ownedBooks";
 import { ReadBooks } from "../books/ReadBooks";
 import { Profile } from "../profile/Profile";
 export const UserViews = () => {
@@ -13,17 +14,18 @@ export const UserViews = () => {
           <>
             <h1>Bookaholic</h1>
             <div>Your All In One Book Tracking Application</div>
+            <OwnedBooks />
 
             <Outlet />
           </>
         }
-      >
-        <Route path="profile" element={<Profile />} />
-        <Route path="readbooks" element={<ReadBooks />} />
-        <Route path="books" element={<BooksList />} />
-        <Route path="books/:bookId" element={<BookDetails />} />
-        <Route path="books/create" element={<AddBookForm />} />
-      </Route>
+      />
+
+      <Route path="profile" element={<Profile />} />
+      <Route path="readbooks" element={<ReadBooks />} />
+      <Route path="books" element={<BooksList />} />
+      <Route path="books/:bookId" element={<BookDetails />} />
+      <Route path="books/create" element={<AddBookForm />} />
     </Routes>
   );
 };
