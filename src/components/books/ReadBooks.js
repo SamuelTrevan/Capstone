@@ -39,8 +39,8 @@ export const ReadBooks = () => {
         {filteredReadBooks.map((b, idx) => {
           return (
             <>
-              <div>{b.title}</div>
-              <img src={b.bookImage} alt={b.title} />
+              <div key={idx}>{b.title}</div>
+              <img key={idx} src={b.bookImage} alt={b.title} />
             </>
           );
         })}
