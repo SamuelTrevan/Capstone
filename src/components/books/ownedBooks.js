@@ -37,12 +37,7 @@ export const OwnedBooks = () => {
       <div>
         <button onClick={() => navigate("/books")}>Add New Owned Book</button>
         {filteredOwnedBooks.map((b, idx) => {
-          return (
-            <>
-              <div key={idx}>{b.title}</div>
-              {/* <button>Remove Book</button> */}
-            </>
-          );
+          return <div key={idx}>{b.title}</div>;
         })}
       </div>
     </>
