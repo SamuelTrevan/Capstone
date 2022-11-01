@@ -118,7 +118,11 @@ export const AddBookForm = () => {
             <option>Select Genre</option>;
             {genres.map((genre) => {
               {
-                return <option value={genre.id}>{genre.name}</option>;
+                return (
+                  <option key={genre.id} value={genre.id}>
+                    {genre.name}
+                  </option>
+                );
               }
             })}
           </select>

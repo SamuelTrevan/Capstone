@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 export const ReadBooks = () => {
   const [ownedBooks, setOwnedBooks] = useState([]);
   const [filteredReadBooks, setFilteredReadBooks] = useState([]);
-
-  const navigate = useNavigate();
 
   const BookaholicUser = localStorage.getItem("bookaholic_user");
   const bookaholicUserObj = JSON.parse(BookaholicUser);
@@ -38,10 +35,9 @@ export const ReadBooks = () => {
       <div>
         {filteredReadBooks.map((b, idx) => {
           return (
-            <>
-              <div key={idx}>{b.title}</div>
-              <img key={idx} src={b.bookImage} alt={b.title} />
-            </>
+            <div key={idx}>
+              <img src={b.bookImage} alt={b.title} />
+            </div>
           );
         })}
       </div>

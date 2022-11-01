@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const UserForm = () => {
   const [profile, updateProfile] = useState({
@@ -8,6 +9,8 @@ export const UserForm = () => {
     isAdmin: false,
     id: 0,
   });
+
+  const navigate = useNavigate();
 
   const BookaholicUser = localStorage.getItem("bookaholic_user");
   const bookaholicUserObj = JSON.parse(BookaholicUser);
@@ -41,7 +44,7 @@ export const UserForm = () => {
     })
       .then((response) => response.json())
       .then(() => {
-        alert("User profile successfully saved");
+        navigate("/");
       });
   };
 

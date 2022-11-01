@@ -2,6 +2,7 @@ import { Outlet, Route, Routes } from "react-router-dom";
 import { AddBookForm } from "../books/AddBook";
 import { BookDetails } from "../books/BookDetails";
 import { BooksList } from "../books/BooksList";
+import { CurrentlyReading } from "../books/CurrentlyReadingBooks";
 import { OwnedBooks } from "../books/ownedBooks";
 import { ReadBooks } from "../books/ReadBooks";
 import { Library } from "../Library.js/Library";
@@ -17,6 +18,7 @@ export const UserViews = () => {
             <div>Your All In One Book Tracking Application</div>
             <Library />
             <OwnedBooks />
+            <CurrentlyReading />
 
             <Outlet />
           </>
