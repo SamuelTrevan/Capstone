@@ -37,14 +37,17 @@ export const OwnedBooks = () => {
       <div>
         <button onClick={() => navigate("/books")}>Add New Owned Book</button>
         {filteredOwnedBooks.map((b, idx) => {
-          return <div key={idx}>{b.title}</div>;
+          return (
+            <div
+              className="book_image"
+              key={idx}
+              onClick={() => navigate(`/books/${b.id}`)}
+            >
+              <img src={b.bookImage} alt={b.title} />
+            </div>
+          );
         })}
       </div>
     </>
   );
-  /*
-  I need to get the list of owned books.
-  I need to compare the userId on the owned books to the user that is logged in
-  I need to display the title of the owned books for the current user that is logged in 
-  */
 };
