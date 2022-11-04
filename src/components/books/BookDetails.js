@@ -114,7 +114,7 @@ export const BookDetails = () => {
     })
       .then((response) => response.json())
       .then(() => {
-        navigate("/");
+        navigate("/books");
       });
   };
 

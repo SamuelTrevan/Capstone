@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Book } from "./Books";
 
-export const BooksList = () => {
+export const BooksList = ({ searchTermState, searchGenre }) => {
   const [books, setBooks] = useState([]);
-  const navigate = useNavigate();
+  const [bookgenres, setBookGenre] = useState([]);
+  const [filteredBooks, setFilteredBooks] = useState([]);
 
   useEffect(() => {
     fetch(`http://localhost:8088/books`)
@@ -14,13 +14,39 @@ export const BooksList = () => {
       });
   }, []);
 
+  useEffect(() => {
+    fetch(`http://localhost:8088/bookGenres?_expand=book&_expand=genre`)
+      .then((response) => response.json())
+      .then((bookArray) => {
+        setBookGenre(bookArray);
+      });
+  }, []);
+
+  useEffect(() => {
+    setFilteredBooks(books);
+  }, [books]);
+
+  useEffect(() => {
+    const searchedBooks = books.filter((book) => {
+      if (book.title.toLowerCase().startsWith(searchTermState.toLowerCase())) {
+        return true;
+      }
+    });
+    setFilteredBooks(searchedBooks);
+  }, [searchTermState]);
+
+  useEffect(() => {
+    const searchedGenre = bookgenres.filter((bookGenre) => {
+      if (bookGenre.genre?.id === parseInt(searchTermState)) {
+        return true;
+      }
+    });
+    setFilteredBooks(searchedGenre);
+  }, [searchGenre]);
+
   return (
     <div>
-      <h1>Master Library</h1>
-      <button onClick={() => navigate("/books/create")}>
-        Add Book to Master Library
-      </button>
-      {books.map((book) => (
+      {filteredBooks.map((book) => (
         <Book key={`book--${book.id}`} book={book} />
       ))}
     </div>

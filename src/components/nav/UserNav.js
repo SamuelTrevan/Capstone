@@ -6,17 +6,17 @@ export const UserNav = () => {
   return (
     <ul className="navbar">
       <li className="navbar__item active">
-        <Link className="navbar__link" to="/">
+        <Link className="navbar__link" to="">
           Home
         </Link>
       </li>
       <li className="navbar__item active">
-        <Link className="navbar__link" to="/profile">
+        <Link className="navbar__link" to="profile">
           Profile
         </Link>
       </li>
       <li className="navbar__item active">
-        <Link className="navbar__link" to="/readbooks">
+        <Link className="navbar__link" to="readbooks">
           Read Books
         </Link>
       </li>
