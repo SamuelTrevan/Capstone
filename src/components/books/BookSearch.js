@@ -29,7 +29,7 @@ export const BookSearch = ({ setterFunction, setterSearchGenre }) => {
             setterSearchGenre(changeEvent.target.value);
           }}
         >
-          <option>Select Genre</option>;
+          <option value={0}>Select Genre</option>;
           {genres.map((genre) => {
             {
               return (

@@ -3,22 +3,13 @@ import { Book } from "./Books";
 
 export const BooksList = ({ searchTermState, searchGenre }) => {
   const [books, setBooks] = useState([]);
-  const [bookgenres, setBookGenre] = useState([]);
   const [filteredBooks, setFilteredBooks] = useState([]);
-
-  useEffect(() => {
-    fetch(`http://localhost:8088/books`)
-      .then((response) => response.json())
-      .then((bookArray) => {
-        setBooks(bookArray);
-      });
-  }, []);
 
   useEffect(() => {
     fetch(`http://localhost:8088/bookGenres?_expand=book&_expand=genre`)
       .then((response) => response.json())
       .then((bookArray) => {
-        setBookGenre(bookArray);
+        setBooks(bookArray);
       });
   }, []);
 
@@ -28,7 +19,9 @@ export const BooksList = ({ searchTermState, searchGenre }) => {
 
   useEffect(() => {
     const searchedBooks = books.filter((book) => {
-      if (book.title.toLowerCase().startsWith(searchTermState.toLowerCase())) {
+      if (
+        book.book.title.toLowerCase().includes(searchTermState.toLowerCase())
+      ) {
         return true;
       }
     });
@@ -36,12 +29,16 @@ export const BooksList = ({ searchTermState, searchGenre }) => {
   }, [searchTermState]);
 
   useEffect(() => {
-    const searchedGenre = bookgenres.filter((bookGenre) => {
-      if (bookGenre.genre?.id === parseInt(searchTermState)) {
-        return true;
-      }
-    });
-    setFilteredBooks(searchedGenre);
+    if (parseInt(searchGenre) === 0) {
+      setFilteredBooks(books);
+    } else {
+      const searchedGenre = books.filter((book) => {
+        if (book.genre?.id === parseInt(searchGenre)) {
+          return true;
+        }
+      });
+      setFilteredBooks(searchedGenre);
+    }
   }, [searchGenre]);
 
   return (
