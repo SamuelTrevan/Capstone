@@ -97,7 +97,7 @@ export const BookDetails = () => {
 
     4. create an alert that notifies the user that the update has been made and then navigate them to the home screen (/)
   */
-  const addBookButton = (event) => {
+  const addBookToOwnedBooksButton = (event) => {
     event.preventDefault();
     const newOwnedBook = {
       bookId: book.id,
@@ -111,6 +111,27 @@ export const BookDetails = () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(newOwnedBook),
+    })
+      .then((response) => response.json())
+      .then(() => {
+        navigate("/books");
+      });
+  };
+
+  const addBookToWantToReadButton = (event) => {
+    event.preventDefault();
+    const newWantToRead = {
+      bookId: book.id,
+      userId: bookaholicUserObj.id,
+      haveRead: false,
+    };
+
+    return fetch(`http://localhost:8088/WantToRead`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newWantToRead),
     })
       .then((response) => response.json())
       .then(() => {
@@ -250,9 +271,18 @@ export const BookDetails = () => {
   return (
     <div className="book">
       {canAddBook ? (
-        <button onClick={(clickEvent) => addBookButton(clickEvent)}>
-          Add to Owned Books
-        </button>
+        <>
+          <button
+            onClick={(clickEvent) => addBookToOwnedBooksButton(clickEvent)}
+          >
+            Add to Owned Books
+          </button>
+          <button
+            onClick={(clickEvent) => addBookToWantToReadButton(clickEvent)}
+          >
+            Want to Read
+          </button>
+        </>
       ) : (
         <>
           <button onClick={(clickEvent) => removeBookButton(clickEvent)}>

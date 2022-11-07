@@ -1,0 +1,45 @@
+import { useEffect, useState } from "react";
+
+export const WantToRead = () => {
+  const [wantToRead, setWantToRead] = useState([]);
+  const [filteredWantToRead, setFilteredWantToRead] = useState([]);
+
+  const BookaholicUser = localStorage.getItem("bookaholic_user");
+  const bookaholicUserObj = JSON.parse(BookaholicUser);
+
+  useEffect(() => {
+    fetch(`http://localhost:8088/wantToRead?_expand=user&_expand=book`)
+      .then((response) => response.json())
+      .then((wishListbooksArray) => {
+        setWantToRead(wishListbooksArray);
+      });
+  }, []);
+
+  useEffect(() => {
+    const filteredWantToRead = wantToRead.filter(
+      (book) => book.userId === bookaholicUserObj.id && book.haveRead
+    );
+    setFilteredWantToRead(
+      filteredWantToRead.map((book) => {
+        return book.book;
+      })
+    );
+  }, [wantToRead]);
+
+  return (
+    <>
+      <div>
+        <h2>Want To Read</h2>
+      </div>
+      <div>
+        {filteredWantToRead.map((b, idx) => {
+          return (
+            <div key={idx}>
+              <img src={b.bookImage} alt={b.title} />
+            </div>
+          );
+        })}
+      </div>
+    </>
+  );
+};

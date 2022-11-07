@@ -18,14 +18,14 @@ export const BooksList = ({ searchTermState, searchGenre }) => {
   }, [books]);
 
   useEffect(() => {
-    const searchedBooks = books.filter((book) => {
+    const searchedByTitle = books.filter((book) => {
       if (
         book.book.title.toLowerCase().includes(searchTermState.toLowerCase())
       ) {
         return true;
       }
     });
-    setFilteredBooks(searchedBooks);
+    setFilteredBooks(searchedByTitle);
   }, [searchTermState]);
 
   useEffect(() => {
@@ -40,6 +40,32 @@ export const BooksList = ({ searchTermState, searchGenre }) => {
       setFilteredBooks(searchedGenre);
     }
   }, [searchGenre]);
+
+  const searchedByTitle = () => {
+    books.filter((book) => {
+      book.book.title.toLowerCase().includes(searchTermState.toLowerCase());
+    });
+  };
+
+  // useEffect(() => {
+  //   if (parseInt(searchGenre) === 0) {
+  //     setFilteredBooks();
+  //   } else {
+  //     if (searchTermState && searchGenre) {
+  //       const searchedBooks = books.filter((book) => {
+  //         if (
+  //           book.book.title
+  //             .toLowerCase()
+  //             .includes(searchTermState.toLowerCase()) &&
+  //           book.genre?.id === parseInt(searchGenre)
+  //         ) {
+  //           return true;
+  //         }
+  //       });
+  //       setFilteredBooks(searchedBooks);
+  //     }
+  //   }
+  // }, [searchTermState, searchGenre]);
 
   return (
     <div>

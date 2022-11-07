@@ -20,6 +20,11 @@ export const UserNav = () => {
           Read Books
         </Link>
       </li>
+      <li className="navbar__item active">
+        <Link className="navbar__link" to="wanttoread">
+          Want To Read
+        </Link>
+      </li>
       {localStorage.getItem("bookaholic_user") ? (
         <li className="navbar__item navbar__logout">
           <Link
