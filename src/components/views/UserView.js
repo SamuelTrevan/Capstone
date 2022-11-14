@@ -1,12 +1,13 @@
 import { Outlet, Route, Routes } from "react-router-dom";
 import { AddBookForm } from "../books/AddBook";
+import { BookContainer } from "../books/BookContainer";
 import { BookDetails } from "../books/BookDetails";
-import { BooksList } from "../books/BooksList";
 import { CurrentlyReading } from "../books/CurrentlyReadingBooks";
 import { OwnedBooks } from "../books/ownedBooks";
 import { ReadBooks } from "../books/ReadBooks";
 import { Library } from "../Library.js/Library";
 import { Profile } from "../profile/Profile";
+
 export const UserViews = () => {
   return (
     <Routes>
@@ -27,8 +28,7 @@ export const UserViews = () => {
 
       <Route path="profile" element={<Profile />} />
       <Route path="readbooks" element={<ReadBooks />} />
-      <Route path="books" element={<BooksList />} />
-      <Route path="books/:bookId" element={<BookDetails />} />
+      <Route path="books" element={<BookContainer />} />
       <Route path="books/create" element={<AddBookForm />} />
     </Routes>
   );

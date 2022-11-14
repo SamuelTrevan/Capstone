@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -158,13 +159,15 @@ export const AddBookForm = () => {
           />
         </div>
       </fieldset>
-      <button
+      <Button
+        style={{ "margin-top": "2em" }}
+        variant="contained"
         onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
         className="submit_button"
       >
         {" "}
         Add New Book{" "}
-      </button>
+      </Button>
     </form>
   );
 };

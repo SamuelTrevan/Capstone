@@ -1,5 +1,7 @@
+import { Button, Card, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Book } from "./Books";
 
 export const OwnedBooks = () => {
   const [ownedBooks, setOwnedBooks] = useState([]);
@@ -24,7 +26,7 @@ export const OwnedBooks = () => {
     );
     setFilteredOwnedBooks(
       filteredOwnedBooks.map((filteredOwnedBook) => {
-        return filteredOwnedBook.book;
+        return { book: filteredOwnedBook.book };
       })
     );
   }, [ownedBooks]);
@@ -34,20 +36,26 @@ export const OwnedBooks = () => {
       <div>
         <h2>Owned Books</h2>
       </div>
-      <div>
-        <button onClick={() => navigate("/books")}>Add New Owned Book</button>
+      <Button
+        style={{ marginBottom: "2em" }}
+        variant="contained"
+        onClick={() => navigate("/books")}
+      >
+        Add New Owned Book
+      </Button>
+      <Grid container>
         {filteredOwnedBooks.map((b, idx) => {
           return (
-            <div
-              className="book_image"
+            <Book
               key={idx}
-              onClick={() => navigate(`/books/${b.id}`)}
+              book={b}
+              // onClick={() => navigate(`/books/${b.id}`)}
             >
-              <img src={b.bookImage} alt={b.title} />
-            </div>
+              {/* <img src={b.bookImage} alt={b.title} /> */}
+            </Book>
           );
         })}
-      </div>
+      </Grid>
     </>
   );
 };
