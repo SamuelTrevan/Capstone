@@ -1,3 +1,4 @@
+import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Book } from "./Books";
 
@@ -25,53 +26,23 @@ export const BooksList = ({ searchTermState, searchGenre }) => {
         return true;
       }
     });
-    setFilteredBooks(searchedByTitle);
-  }, [searchTermState]);
-
-  useEffect(() => {
     if (parseInt(searchGenre) === 0) {
-      setFilteredBooks(books);
+      setFilteredBooks(searchedByTitle);
     } else {
-      const searchedGenre = books.filter((book) => {
+      const searchedGenre = searchedByTitle.filter((book) => {
         if (book.genre?.id === parseInt(searchGenre)) {
           return true;
         }
       });
       setFilteredBooks(searchedGenre);
     }
-  }, [searchGenre]);
-
-  const searchedByTitle = () => {
-    books.filter((book) => {
-      book.book.title.toLowerCase().includes(searchTermState.toLowerCase());
-    });
-  };
-
-  // useEffect(() => {
-  //   if (parseInt(searchGenre) === 0) {
-  //     setFilteredBooks();
-  //   } else {
-  //     if (searchTermState && searchGenre) {
-  //       const searchedBooks = books.filter((book) => {
-  //         if (
-  //           book.book.title
-  //             .toLowerCase()
-  //             .includes(searchTermState.toLowerCase()) &&
-  //           book.genre?.id === parseInt(searchGenre)
-  //         ) {
-  //           return true;
-  //         }
-  //       });
-  //       setFilteredBooks(searchedBooks);
-  //     }
-  //   }
-  // }, [searchTermState, searchGenre]);
+  }, [searchTermState, searchGenre]);
 
   return (
-    <div>
+    <Grid container>
       {filteredBooks.map((book) => (
         <Book key={`book--${book.id}`} book={book} />
       ))}
-    </div>
+    </Grid>
   );
 };

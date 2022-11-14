@@ -1,4 +1,6 @@
+import { Card, CardContent, CardMedia, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
+import { Book } from "./Books";
 
 export const ReadBooks = () => {
   const [ownedBooks, setOwnedBooks] = useState([]);
@@ -22,7 +24,7 @@ export const ReadBooks = () => {
     );
     setFilteredReadBooks(
       filteredReadBooks.map((filteredReadBook) => {
-        return filteredReadBook.book;
+        return filteredReadBook;
       })
     );
   }, [ownedBooks]);
@@ -32,15 +34,19 @@ export const ReadBooks = () => {
       <div>
         <h2>Read Books</h2>
       </div>
-      <div>
+      <Grid container>
         {filteredReadBooks.map((b, idx) => {
-          return (
-            <div key={idx}>
-              <img src={b.bookImage} alt={b.title} />
-            </div>
-          );
+          return <Book book={b} key={idx} />;
         })}
-      </div>
+      </Grid>
     </>
   );
 };
+
+// {filteredReadBooks.map((b, idx) => {
+//   return (
+//     <div key={idx}>
+//       <img src={b.bookImage} alt={b.title} />
+//     </div>
+//   );
+// })}

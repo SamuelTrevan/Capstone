@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -106,12 +107,14 @@ export const UserForm = () => {
             />
           </div>
         </fieldset>
-        <button
+        <Button
+          style={{ marginTop: "2em" }}
+          variant="contained"
           onClick={(clickEvent) => handleSaveButtonClick(clickEvent)}
           className="btn btn-primary"
         >
           Save Profile
-        </button>
+        </Button>
       </form>
     </>
   );

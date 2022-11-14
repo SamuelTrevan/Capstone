@@ -5,7 +5,6 @@ import { BookDetails } from "../books/BookDetails";
 import { CurrentlyReading } from "../books/CurrentlyReadingBooks";
 import { OwnedBooks } from "../books/ownedBooks";
 import { ReadBooks } from "../books/ReadBooks";
-// import { WantToRead } from "../books/WantToRead";
 import { Library } from "../Library.js/Library";
 import { Profile } from "../profile/Profile";
 
@@ -29,9 +28,7 @@ export const UserViews = () => {
 
       <Route path="profile" element={<Profile />} />
       <Route path="readbooks" element={<ReadBooks />} />
-      {/* <Route path="wanttoread" element={<WantToRead />} /> */}
       <Route path="books" element={<BookContainer />} />
-      <Route path="books/:bookId" element={<BookDetails />} />
       <Route path="books/create" element={<AddBookForm />} />
     </Routes>
   );

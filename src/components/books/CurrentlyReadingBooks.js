@@ -1,5 +1,7 @@
+import { Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Book } from "./Books";
 
 export const CurrentlyReading = () => {
   const [currentlyReading, setcurrentlyReading] = useState([]);
@@ -25,7 +27,7 @@ export const CurrentlyReading = () => {
     );
     setcurrentlyReadingBooks(
       filteredCurrentlyReading.map((book) => {
-        return book.book;
+        return book;
       })
     );
   }, [currentlyReading]);
@@ -36,15 +38,11 @@ export const CurrentlyReading = () => {
         <div>
           <h2>Currently Reading Books</h2>
         </div>
-        <div>
+        <Grid container>
           {currentlyReadingBooks.map((b, idx) => {
-            return (
-              <div key={idx} onClick={() => navigate(`/books/${b.id}`)}>
-                <img src={b.bookImage} alt={b.title} />
-              </div>
-            );
+            return <Book book={b} key={idx} />;
           })}
-        </div>
+        </Grid>
       </>
     );
   }

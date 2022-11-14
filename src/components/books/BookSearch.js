@@ -1,6 +1,11 @@
+import { FormControl, Grid, MenuItem, Select, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 
-export const BookSearch = ({ setterFunction, setterSearchGenre }) => {
+export const BookSearch = ({
+  setterFunction,
+  setterSearchGenre,
+  searchedGenre,
+}) => {
   const [genres, setGenre] = useState([]);
 
   useEffect(() => {
@@ -13,34 +18,39 @@ export const BookSearch = ({ setterFunction, setterSearchGenre }) => {
 
   return (
     <>
-      <div>
-        <input
-          onChange={(changeEvent) => {
-            setterFunction(changeEvent.target.value);
-          }}
-          type="text"
-          placeholder="Enter Book Tilte here"
-        />
-      </div>
+      <Grid container style={{ "margin-bottom": "2em" }}>
+        <Grid style={{ "margin-right": "2em" }}>
+          <TextField
+            label="Enter book title here"
+            onChange={(changeEvent) => {
+              setterFunction(changeEvent.target.value);
+            }}
+            type="text"
+            placeholder="Enter Book Title here"
+          />
+        </Grid>
 
-      <div>
-        <select
-          onChange={(changeEvent) => {
-            setterSearchGenre(changeEvent.target.value);
-          }}
-        >
-          <option value={0}>Select Genre</option>;
-          {genres.map((genre) => {
-            {
-              return (
-                <option key={genre.id} value={genre.id}>
-                  {genre.name}
-                </option>
-              );
-            }
-          })}
-        </select>
-      </div>
+        <Grid>
+          <Select
+            label="Genre"
+            value={searchedGenre}
+            onChange={(changeEvent) => {
+              setterSearchGenre(changeEvent.target.value);
+            }}
+          >
+            <MenuItem value={0}>Select Genre</MenuItem>;
+            {genres.map((genre) => {
+              {
+                return (
+                  <MenuItem key={genre.id} value={genre.id}>
+                    {genre.name}
+                  </MenuItem>
+                );
+              }
+            })}
+          </Select>
+        </Grid>
+      </Grid>
     </>
   );
 };
